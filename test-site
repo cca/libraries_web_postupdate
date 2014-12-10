@@ -1,0 +1,42 @@
+#!/usr/bin/env fish
+# request a series of our most popular/important pages
+# used for a) testing the site after a module or Drupal upgrade
+# & b) priming Drupal's cache after it has been cleared
+
+# using gnu test fails with multiple conditions for reasons I don't feel like finding out
+
+if test (count $argv) -gt 0
+    if command [ $argv[1] = "-h" -o $argv[1] = "--help" -o $argv[1] = "help" ]
+        echo 'usage:'
+        echo -e '\ttest-sites [live]'
+        echo -e '\nrequests development site pages by default'
+        echo 'if "live" is passed as an argument, requests live site pages'
+        exit 0
+    end
+
+    if command [ $argv[1] = "live" ]
+        set_color --bold red
+        set root 'http://libraries.cca.edu/'
+        echo "Testing live website $root"
+    end
+else
+    set_color --bold red
+    set root 'https://vm-lib-www-dev-01/'
+    echo "Testing dev website $root"
+end
+
+set_color normal
+
+# list of paths to request
+# assembled from looking at our web analytics
+set pages '' 'info/hours' 'new-materials-lib' 'online' 'staff' 'other-libraries' 'content/course-reserves-request'
+
+for page in $pages
+    set url $root$page
+    echo "Requesting $url"
+    set_color --bold
+    # set output to STDOUT & then route to /dev/null
+    # pipe STDERR (wget HTTP headers & messages) through grep to get the HTTP status code
+    wget --quiet --output-document=- --no-check-certificate $url > /dev/null ^| grep --color=never 'HTTP'
+    set_color normal
+end
