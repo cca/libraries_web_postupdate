@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
-cp test-site ~/bin
-cp test-course-reserves.py ~/bin
+cp -v {test-site,test-course-reserves.py} ~/bin
