@@ -8,13 +8,13 @@
 if test (count $argv) -gt 0
     if command [ $argv[1] = "-h" -o $argv[1] = "--help" -o $argv[1] = "help" ]
         echo 'usage:'
-        echo -e '\ttest-sites [live]'
+        echo -e '\ttest-site [live]'
         echo -e '\nrequests development site pages by default'
         echo 'if "live" is passed as an argument, requests live site pages'
         exit 0
     end
 
-    if command [ $argv[1] = "live" ]
+    if command [ $argv[1] = "live" -o $argv[1] = "--live" ]
         set_color --bold red
         set root 'http://libraries.cca.edu/'
         echo "Testing live website $root"
