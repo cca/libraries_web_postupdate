@@ -40,3 +40,26 @@ for page in $pages
     wget --quiet --output-document=- --no-check-certificate $url > /dev/null ^| grep --color=never 'HTTP'
     set_color normal
 end
+
+# use drush to check Drupal's logs for issues
+if type -t drush >/dev/null
+    # relies on properly configured drush aliases
+    # see included aliases.drushrc.php for an example
+    if test $root = 'http://libraries.cca.edu/'
+        set alias '@live'
+    else
+        set alias '@dev1'
+    end
+
+    echo
+    set_color --bold red
+    echo 'High-priority log messages:'
+    set_color normal
+    drush $alias ws --severity=emergency --severity=alert --severity=critical
+    echo
+
+    set_color --bold red
+    echo 'Low-priority log messages:'
+    set_color normal
+    drush $alias ws --severity=error --severity=warning
+end
