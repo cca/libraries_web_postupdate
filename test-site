@@ -55,11 +55,14 @@ if type -t drush >/dev/null
     set_color --bold red
     echo 'High-priority log messages:'
     set_color normal
-    drush $alias ws --severity=emergency --severity=alert --severity=critical
+    drush $alias ws --severity=emergency
+    drush $alias ws --severity=alert
+    drush $alias ws --severity=critical
     echo
 
     set_color --bold red
     echo 'Low-priority log messages:'
     set_color normal
-    drush $alias ws --severity=error --severity=warning
+    drush $alias ws --severity=error
+    drush $alias ws --severity=warning
 end

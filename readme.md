@@ -13,7 +13,7 @@ These scripts are fairly specific to my setup. I've made a `setup.sh` script whi
 > ./test-site
 > # automated form testing
 > ./test-course-reserves.py
-> # add "live" or "--live" to these, respectively, to test live site
+> # add "--live" to these to test live site
 > # copy these scripts into ~/bin (which I have on my path)
 > ./cp.sh
 ```
