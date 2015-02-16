@@ -46,23 +46,23 @@ if type -t drush >/dev/null
     # relies on properly configured drush aliases
     # see included aliases.drushrc.php for an example
     if test $root = 'http://libraries.cca.edu/'
-        set alias '@live'
+        set target '@live'
     else
-        set alias '@dev1'
+        set target '@dev1'
     end
 
     echo
     set_color --bold red
     echo 'High-priority log messages:'
     set_color normal
-    drush $alias ws --severity=emergency
-    drush $alias ws --severity=alert
-    drush $alias ws --severity=critical
+    drush $target ws --severity=emergency
+    drush $target ws --severity=alert
+    drush $target ws --severity=critical
     echo
 
     set_color --bold red
     echo 'Low-priority log messages:'
     set_color normal
-    drush $alias ws --severity=error
-    drush $alias ws --severity=warning
+    drush $target ws --severity=error
+    drush $target ws --severity=warning
 end
