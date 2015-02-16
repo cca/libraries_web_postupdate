@@ -17,12 +17,18 @@ if test (count $argv) -gt 0
     if command [ $argv[1] = "live" -o $argv[1] = "--live" ]
         set_color --bold red
         set root 'http://libraries.cca.edu/'
-        echo "Testing live website $root"
+        echo "Testing live server at $root"
+    end
+
+    if command [ $argv[1] = "dev" -o $argv[1] = "--dev" ]
+        set_color --bold red
+        set root 'https://vm-lib-www-dev-01/'
+        echo "Testing dev server at $root"
     end
 else
     set_color --bold red
     set root 'https://vm-lib-www-dev-01/'
-    echo "Testing dev website $root"
+    echo "Testing dev server at $root"
 end
 
 set_color normal
