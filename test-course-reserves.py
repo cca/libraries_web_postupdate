@@ -2,10 +2,12 @@
 import argparse
 from selenium import webdriver
 
-parser = argparse.ArgumentParser(description='Submit the Course Reserves form on the library website as a way to test module/Drupal upgrades.')
-
-parser.add_argument('--live', dest="live", help='test the course reserves form on the live website', action='store_true')
-parser.add_argument('--email', help='email address to submit through form', default='ephetteplace@cca.edu')
+parser = argparse.ArgumentParser(description='Submit the Course Reserves form \
+on the library website as a way to test module/Drupal upgrades.')
+parser.add_argument('--live', dest="live", help='test the course reserves form \
+on the live website', action='store_true')
+parser.add_argument('--email', help='email address to submit through form',
+                    default='ephetteplace@cca.edu')
 parser.set_defaults(live=False)
 
 args = parser.parse_args()
@@ -34,15 +36,20 @@ browser.implicitly_wait(30)
 browser.get(url)
 
 # location radio button
-browser.find_element_by_id('edit-submitted-course-and-contact-information-course-reserves-requested-for-1').click()
+browser.find_element_by_id('edit-submitted-course-and-contact-information-\
+course-reserves-requested-for-1').click()
 # semester <select> drop-down, get first <option>
-browser.find_element_by_id('edit-submitted-course-and-contact-information-semester').find_elements_by_tag_name('option')[1].click()
+browser.find_element_by_id('edit-submitted-course-and-contact-information-\
+semester').find_elements_by_tag_name('option')[1].click()
 # instructor
-browser.find_element_by_id('edit-submitted-course-and-contact-information-instructor').send_keys(vals['instructor'])
+browser.find_element_by_id('edit-submitted-course-and-contact-information-\
+instructor').send_keys(vals['instructor'])
 # course title
-browser.find_element_by_id('edit-submitted-course-and-contact-information-course-title').send_keys(vals['course'])
+browser.find_element_by_id('edit-submitted-course-and-contact-information-\
+course-title').send_keys(vals['course'])
 # email
-browser.find_element_by_id('edit-submitted-course-and-contact-information-email-addr').send_keys(vals['email'])
+browser.find_element_by_id('edit-submitted-course-and-contact-information-\
+email-addr').send_keys(vals['email'])
 
 # submit the form
 browser.find_element_by_id('edit-submit').click()
