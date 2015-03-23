@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import argparse
 from selenium import webdriver
+from time import sleep
 
 parser = argparse.ArgumentParser(description='Submit the Course Reserves form \
 on the library website as a way to test module/Drupal upgrades.')
@@ -53,3 +54,6 @@ email-addr').send_keys(vals['email'])
 
 # submit the form
 browser.find_element_by_id('edit-submit').click()
+
+sleep(2)
+browser.quit()
