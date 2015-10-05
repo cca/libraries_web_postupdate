@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 from __future__ import print_function
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from time import sleep
-from sub_process import call
+from subprocess import call
 import webbrowser
 """
 test the libraries' Google Forms which are hooked up to Google Apps Script
@@ -73,14 +74,14 @@ def test_instruction():
     """
     browser.get(form_root.format(forms['instruction']))
     # wait for user to manually sign into Google
-    # @TODO should automate this, probably by passing credentials on the cli
+    # @TODO should automate this, probably by passing credentials on the CLI
     print('Waiting to sign into Google, hit Return when done...')
-    call('read')  # gotta be a native Python way to do this a/o/t shelling out
+    call('read')  # gotta be a native Python way to do this w/o shelling out
     # course name
     browser.find_element_by_id('entry_93795666').send_keys('TESTS-101')
     # date/time, string sent looks weird here but it's just the date
-    # 01/01/200000 10:00 AM with the date/time autofill behavior
-    browser.find_element_by_id('entry_608498536').send_keys('0101200000100A')
+    # 01/01/2000 10:00 AM with the date/time autofill behavior
+    browser.find_element_by_id('entry_608498536').send_keys('01012000' + Keys.TAB + '1000A')
     browser.find_element_by_id('ss-submit').click()
 
 
