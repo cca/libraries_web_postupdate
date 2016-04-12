@@ -48,19 +48,19 @@ def test_recommendations():
     browser.get(form_root.format(forms['acquisitions']))
 
     # first citation
-    browser.find_element_by_id('entry_420214461').send_keys(vals['first title'])
+    fill_in("First Title", vals['first title'])
     # leave blank a bunch of optional fields...
     # name
-    browser.find_element_by_id('entry_967350359').send_keys(vals['name'])
+    fill_in("Name", vals['name'])
     # CCA affilliation => Grad Student
-    browser.find_element_by_id('group_942677086_1').click()
+    click("Graduate Student")
     # email
-    browser.find_element_by_id('entry_1030731656').send_keys(vals['email'])
+    fill_in("Email", vals['email'])
     # program => Writing/Literature/Comics
-    browser.find_element_by_id('group_1569646515_7').click()
+    click("Writing/Literature/Comics")
 
     # submit form
-    browser.find_element_by_id('ss-submit').click()
+    browser.find_element_by_tag_name('form').submit()
 
 
 def test_ill():
