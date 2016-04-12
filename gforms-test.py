@@ -25,6 +25,22 @@ vals = {
 }
 
 
+def fill_in(label, value):
+    """
+    Given ARIA label, fill in all matching form inputs with provided value
+    """
+    # find_elements type method return lists
+    for el in browser.find_elements_by_css_selector('[aria-label="' + label + '"]'):
+        el.send_keys(value)
+
+
+def click(label):
+    """
+    Given ARIA label, click the DOM element
+    """
+    browser.find_elements_by_css_selector('[aria-label="' + label + '"]')[0].click()
+
+
 def test_recommendations():
     """
     test the recommended acquisitions form
