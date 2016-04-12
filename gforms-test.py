@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from __future__ import print_function
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from time import sleep
 from subprocess import call
 import webbrowser
@@ -94,11 +93,15 @@ def test_instruction():
     print('Waiting to sign into Google, hit Return when done...')
     call('read')  # gotta be a native Python way to do this w/o shelling out
     # course name
-    browser.find_element_by_id('entry_93795666').send_keys('TESTS-101')
-    # date/time, string sent looks weird here but it's just the date
-    # 01/01/2000 10:00 AM with the date/time autofill behavior
-    browser.find_element_by_id('entry_608498536').send_keys('01012000' + Keys.TAB + '1000A')
-    browser.find_element_by_id('ss-submit').click()
+    fill_in('Course', 'TESTS-101')
+    # date/time, string is more complicated to do, multi-part input
+    # we set to 01/01/2000 10:10 AM
+    for el in browser.find_elements_by_css_selector('input[type="date"]'):
+        el.send_keys('01012000')
+    fill_in('Hour', '10')
+    fill_in('Minute', '10')
+    # AM is default so we don't need to specify
+    browser.find_element_by_tag_name('form').submit()
 
 
 def open_sheets():
