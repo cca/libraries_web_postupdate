@@ -68,19 +68,21 @@ def test_ill():
     """
     browser.get(form_root.format(forms['ill']))
     # citation
-    browser.find_element_by_id('entry_17105932').send_keys(vals['first title'])
+    fill_in('Citation', vals['first title'])
     # name
-    browser.find_element_by_id('entry_1904144554').send_keys(vals['name'])
+    fill_in('Name', vals['name'])
     # email
-    browser.find_element_by_id('entry_1309367559').send_keys(vals['email'])
+    fill_in('Email', vals['email'])
     # CCA affilliation => Grad Student
-    browser.find_element_by_id('group_2072708086_2').click()
-    # department => Architecture
-    # <select> drop-down, get appropriate <option>
-    browser.find_element_by_id('entry_443514869').find_elements_by_tag_name(
-        'option')[1].click()
+    click('Graduate Student')
+    # Department drop-down is complicated because choices are hidden & cannot be clicked
+    # We need to do something like click Department label, click specific option
+    drop_down = browser.find_elements_by_css_selector('[aria-label="Department"]')[0]
+    dept = browser.find_elements_by_css_selector('[aria-label="Architecture"]')[0]
+    # http://selenium-python.readthedocs.org/api.html#module-selenium.webdriver.common.action_chains
+    webdriver.ActionChains(browser).click(drop_down).move_to_element(dept).click(dept).perform()
     # submit form
-    browser.find_element_by_id('ss-submit').click()
+    browser.find_element_by_tag_name('form').submit()
 
 
 def test_instruction():
